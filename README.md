@@ -30,10 +30,14 @@ flowchart TB
 	app --> sec --> trans --> net --> link
 	h1[Headers HTTP: Host, Cookie, CSP, HSTS, CORS]
 	h2[Headers de e-mail: Received, DKIM-Signature]
-	h3[Campos de rede: flags TCP, extensões TLS]
+	h3[Campos IP: endereçamento e opções]
+	h4[Flags TCP: SYN, ACK, FIN etc.]
+	h5[Extensões TLS: SNI, ALPN]
 	h1 -. pertencem à aplicação .-> app
 	h2 -. pertencem à mensagem .-> app
-	h3 -. campos/metadata .-> trans
+	h3 -. campos da camada IP .-> net
+	h4 -. campos da camada TCP .-> trans
+	h5 -. extensões do handshake .-> sec
 ```
 
 Headers HTTP e de e-mail pertencem aos respectivos protocolos de aplicação; não são headers da camada IP/TCP. Em HTTP/3, HTTP é transportado sobre QUIC/UDP. [Visão geral](docs/protocolos/camada-transporte.md).
